@@ -7,6 +7,12 @@ import unittest
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 import models
+from models.user import User
+from models.state import State
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class TestFileStorageInstantiation(unittest.TestCase):
@@ -53,7 +59,7 @@ class TestFileStorageMethods(unittest.TestCase):
             models.storage.all(None)
 
     def test_new(self):
-        objects = [BaseModel()]
+        objects = [BaseModel(), User(), State(), Place(), City(), Amenity(), Review()]
         for obj in objects:
             models.storage.new(obj)
             key = f"{obj.__class__.__name__}.{obj.id}"
@@ -66,7 +72,7 @@ class TestFileStorageMethods(unittest.TestCase):
             models.storage.new(None)
 
     def test_save(self):
-        objects = [BaseModel()]
+        objects = [BaseModel(), User(), State(), Place(), City(), Amenity(), Review()]
         for obj in objects:
             models.storage.new(obj)
         models.storage.save()
@@ -80,7 +86,7 @@ class TestFileStorageMethods(unittest.TestCase):
             models.storage.save(None)
 
     def test_reload(self):
-        objects = [BaseModel()]
+        objects = [BaseModel(), User(), State(), Place(), City(), Amenity(), Review()]
         for obj in objects:
             models.storage.new(obj)
         models.storage.save()
