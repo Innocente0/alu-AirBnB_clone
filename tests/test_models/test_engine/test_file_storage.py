@@ -96,7 +96,9 @@ class TestFileStorageMethods(unittest.TestCase):
             self.assertIn(key, models.storage.all())
 
     def test_reload_no_file(self):
-        self.assertRaises(FileNotFoundError, models.storage.reload)
+        initial_objects = models.storage.all().copy()
+        models.storage.reload()  # No file present, should do nothing
+        self.assertEqual(models.storage.all(), initial_objects)
 
     def test_reload_with_args(self):
         with self.assertRaises(TypeError):
